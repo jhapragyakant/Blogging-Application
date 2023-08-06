@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.pragyakantjha</groupId>
-	<artifactId>Bloggin-Application</artifactId>
+	<artifactId>Blogging-Application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Bloggin-Application</name>
+	<name>Blogging-Application</name>
 	<description>Project for learning blogging application</description>
 	<properties>
 		<java.version>11</java.version>
