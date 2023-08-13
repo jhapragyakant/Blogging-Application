@@ -10,6 +10,4 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    List<Post> findByUser(User user);
-    List<Post> findByCategory(Category category);
 }
