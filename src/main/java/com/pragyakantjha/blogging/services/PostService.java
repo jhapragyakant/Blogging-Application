@@ -8,7 +8,7 @@ public interface PostService {
     PostDto createPost(PostDto postDto, Integer userId, Integer categoryId);
     PostDto updatePost(PostDto newPostDto, Integer postId);
     void deletePost(Integer postId);
-    List<PostDto> getAllPosts();
+    List<PostDto> getAllPosts(Integer pageNumber, Integer pageSize);
     PostDto getPostById(Integer postId);
     //get all post by category
     List<PostDto> getPostByCategory(Integer categoryId);
