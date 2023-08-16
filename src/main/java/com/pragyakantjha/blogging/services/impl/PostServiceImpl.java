@@ -9,6 +9,7 @@ import com.pragyakantjha.blogging.repositories.CategoryRepository;
 import com.pragyakantjha.blogging.repositories.PostRepository;
 import com.pragyakantjha.blogging.repositories.UserRepository;
 import com.pragyakantjha.blogging.services.PostService;
+import com.pragyakantjha.blogging.utils.PostResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -68,12 +69,20 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public List<PostDto> getAllPosts(Integer pageNumber, Integer pageSize) {
+    public PostResponse getAllPosts(Integer pageNumber, Integer pageSize) {
         Pageable page = PageRequest.of(pageNumber, pageSize);
-        Page<Post> pages = this.postRepository.findAll(page);
-        List<Post> posts = pages.getContent();
-        List<PostDto> postDtos = posts.stream().map((post)-> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
-        return postDtos;
+        Page<Post> pagePost = this.postRepository.findAll(page);
+        List<Post> allPosts = pagePost.getContent();
+        List<PostDto> postDtos = allPosts.stream().map((post)-> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+        PostResponse postResponse = new PostResponse();
+
+        postResponse.setContent(postDtos);
+        postResponse.setPageNumber(pagePost.getNumber());
+        postResponse.setPageSize(pagePost.getSize());
+        postResponse.setTotalElements(pagePost.getTotalElements());
+        postResponse.setTotalPages(pagePost.getTotalPages());
+        postResponse.setLastPage(pagePost.isLast());
+        return postResponse;
     }
 
     @Override
