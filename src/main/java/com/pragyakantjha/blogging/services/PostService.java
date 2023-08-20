@@ -1,7 +1,7 @@
 package com.pragyakantjha.blogging.services;
 
-import com.pragyakantjha.blogging.entities.Post;
 import com.pragyakantjha.blogging.payload.PostDto;
+import com.pragyakantjha.blogging.utils.PostResponse;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public interface PostService {
     PostDto createPost(PostDto postDto, Integer userId, Integer categoryId);
     PostDto updatePost(PostDto newPostDto, Integer postId);
     void deletePost(Integer postId);
-    List<Post> getAllPosts();
+    PostResponse getAllPosts(Integer pageNumber, Integer pageSize, String sortBy, String sortDir);
     PostDto getPostById(Integer postId);
     //get all post by category
     List<PostDto> getPostByCategory(Integer categoryId);
