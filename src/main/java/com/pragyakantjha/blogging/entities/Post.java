@@ -1,14 +1,15 @@
 package com.pragyakantjha.blogging.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "posts")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +28,11 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
     @ManyToOne
     private User user;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private Set<Comment> comments = new HashSet<>();
 
 }
