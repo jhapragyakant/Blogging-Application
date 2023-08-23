@@ -81,6 +81,11 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
+    @Override
+    public Boolean doesUserExist(String email) {
+        return this.userRepository.existsByEmail(email);
+    }
+
     public UserDto convertToDto(User user) {
         UserDto userDto = modelMapper.map(user, UserDto.class);
 
