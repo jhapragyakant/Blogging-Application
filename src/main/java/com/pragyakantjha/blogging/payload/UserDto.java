@@ -1,11 +1,15 @@
 package com.pragyakantjha.blogging.payload;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.pragyakantjha.blogging.entities.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,6 +27,7 @@ public class UserDto {
     private String email;
 
     @NotEmpty
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Size(min = 8, max = 20, message = "password must be between 8 and 20 characters")
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[^\\w\\s]).{8,}$",
             message = "Should have at least one uppercase letter, one lowercase letter, one digit, one special character, and a minimum length of 8 characters")
@@ -30,4 +35,6 @@ public class UserDto {
 
     @NotEmpty
     private String about;
+
+    private Set<RoleDto> roles = new HashSet<>();
 }
