@@ -12,8 +12,8 @@ import java.util.Set;
 @Getter
 @Setter
 public class Role {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
 
