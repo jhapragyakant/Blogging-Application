@@ -6,6 +6,7 @@ import com.pragyakantjha.blogging.payload.JwtAuthResponse;
 import com.pragyakantjha.blogging.payload.UserDto;
 import com.pragyakantjha.blogging.security.JwtTokenHelper;
 import com.pragyakantjha.blogging.services.UserService;
+import com.pragyakantjha.blogging.utils.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,7 +62,10 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> registerNewUser(@Valid @RequestBody UserDto userDto){
+    public ResponseEntity<?> registerNewUser(@Valid @RequestBody UserDto userDto){
+        if(userService.doesUserExist(userDto.getEmail())){
+            return new ResponseEntity<>(new ApiResponse(false,"Email already exists!"), HttpStatus.CONFLICT);
+        }
         UserDto registeredUser = userService.registerUser(userDto);
         return new ResponseEntity<>(registeredUser,HttpStatus.CREATED);
     }

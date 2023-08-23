@@ -23,7 +23,10 @@ public class UserController {
 
     //POST - create user
     @PostMapping("/create")
-    public ResponseEntity<UserDto> createUser( @Valid @RequestBody UserDto userDto){
+    public ResponseEntity<?> createUser( @Valid @RequestBody UserDto userDto){
+        if(userService.doesUserExist(userDto.getEmail())){
+            return new ResponseEntity<>(new ApiResponse(false,"Email already exists!"), HttpStatus.CONFLICT);
+        }
         UserDto createdUserDto = userService.createUser(userDto);
         return new ResponseEntity<>(createdUserDto, HttpStatus.CREATED);
     }
