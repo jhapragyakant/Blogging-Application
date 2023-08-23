@@ -25,6 +25,6 @@ public class BloggingApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println(this.passwordEncoder.encode("uio"));
+		System.out.println(this.passwordEncoder.encode("modelmapper"));
 	}
 }
